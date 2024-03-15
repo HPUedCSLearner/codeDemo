@@ -4,9 +4,9 @@
 
 
 ### 生成随机数数组
-[getRandomArr01.cpp](./getRandomArr/getRandomArr01.cpp)
-[getRandomArr02-writeToFile.cpp](./getRandomArr/getRandomArr02-writeToFile.cpp)
-[getRandomArr03-readFileToArr.cpp](./getRandomArr/getRandomArr03-readFileToArr.cpp)
+[getRandomArr01.cpp;](./getRandomArr/getRandomArr01.cpp)
+[getRandomArr02-writeToFile.cpp;](./getRandomArr/getRandomArr02-writeToFile.cpp)
+[getRandomArr03-readFileToArr.cpp;](./getRandomArr/getRandomArr03-readFileToArr.cpp)
 
 写文件的基本操作
 ```C++
