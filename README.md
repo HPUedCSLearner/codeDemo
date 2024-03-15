@@ -1,3 +1,7 @@
 # codeDemo
 
-[cplusplus](./cplusplus/cplusplus.md)
+[Cplusplus](./cplusplus/cplusplus.md)
+
+[Python](./python/python.md)
+
+[Algorithm](./algorithm/algorithm.md)
