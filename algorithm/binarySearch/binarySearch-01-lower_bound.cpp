@@ -6,9 +6,10 @@
 int binarySearch(const std::vector<int>& array, int target) {
     int n = array.size();
     // int l = 0, r = n - 1;
-    int l = 0, r = n; // std::lower_bound()
+    int l = 0, r = n; // std::lower_bound(), 令r等于n是为了，当target都大于数组元素
     int mid;
 
+    //寻找第一个大于等于target的数，即也是插入位置
     while(l<r) {
         mid = l + (r - l) / 2;
         if(array[mid] >= target) {
@@ -19,7 +20,7 @@ int binarySearch(const std::vector<int>& array, int target) {
     }
 
     // Debug
-    std::cout << "r, l:" << r << " " << l << std::endl;
+    // std::cout << "r, l:" << r << " " << l << std::endl;
 
     // 程序结束，l == r
     return l;
