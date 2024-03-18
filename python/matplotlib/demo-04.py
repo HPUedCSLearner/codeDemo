@@ -6,11 +6,12 @@ import numpy as np
 
 plt.rcParams['axes.unicode_minus']=False#用来正常显示负号
 
-x  = [16,32,64,128,256]#点的横坐标
-y1 = [650,285,190, 150,100]#线1的纵坐标
-y2 = [645,300,199, 155,97]#线2的纵坐标
-y3 = [0.02,0.023,0.025, 0.023, 0.019]
-# y3 = np.abs(y3 - y2) / y2
+x  = np.array([16,32,64,128,256]) #点的横坐标
+y1 = np.array([650,340,190, 103,70]) # 实际时间
+y2 = np.array([645,350,185, 108,72])  # 预测时间
+# y3 =np.array() [0.02,0.023,0.025, 0.023, 0.019]
+y3 = np.abs(y1 - y2) / y2
+print(y3)
 
 fig = plt.figure()
 
@@ -33,7 +34,7 @@ ax2.plot(x, y3, 'grey')
 
 # 设置坐标轴范围
 # ax2.set_xlim([0, np.e])
-ax2.set_ylim([0.01, 0.1])
+ax2.set_ylim([0.0, 1])
 ax2.set_ylabel('相对误差(%)')
 # ax2.set_xlabel('Same X for both exp(-x) and ln(x)')
 
