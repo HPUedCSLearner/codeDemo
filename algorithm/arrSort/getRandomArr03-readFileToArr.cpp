@@ -48,7 +48,7 @@ std::vector<int> readRandomArrayFromFile(const std::string& filename) {
 }
 
 int main() {
-    int size = 1000;   // 数组大小
+    int size = 10000;   // 数组大小
     int min = 0;     // 随机数最小值
     int max = 1000;   // 随机数最大值
     std::string filename = "random_array.txt"; // 输出文件名

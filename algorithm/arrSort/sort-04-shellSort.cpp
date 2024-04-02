@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-
 #include <chrono>
 
 using namespace std;
@@ -10,25 +9,34 @@ using namespace std;
 std::vector<int> readRandomArrayFromFile(const std::string& filename);
 void checkSortArr(vector<int>& arr, int n);
 
-void heapify(vector<int>& arr, int n, int i);
-void heapSort(vector<int>& arr, int n);
-
-void testSwapVector()
+// [0, i]表示有序元素
+// [i+1, n-1] 表示待排序元素
+// 初始状态，i = 0, 第一个元素是有序的，还有n-1个元素需要进行插入排序
+void insertSort(vector<int>& arr, int n)
 {
-    // vector<int> a{1, 2, 3, 4};   // swap(a[0], b[1]) ok
-    int a[] = {1, 2, 3, 4};         // swap(a[0], b[1]) ok
-    for(const auto& i : a){
-        cout << i << " ";
-    } cout << endl;
-
-    swap(a[0], a[1]);
-
-    for(const auto& i : a){
-        cout << i << " ";
-    } cout << endl;
+    int i = 0, k;
+    for(int j = i+1; j < n; ++j) {
+        k = j;
+        while(k-1 >= 0 && arr[k] < arr[k-1]) {   // 我比你小，你往后库对库对（后移）
+            swap(arr[k], arr[k-1]);         
+            --k;
+        }
+    }
 }
-// 1 2 3 4 
-// 2 1 3 4
+
+void shellSort(vector<int>& arr, int n)
+{
+    int j;
+    for(int gap = n/2; gap >= 1; gap /= 2) {    // gap排序的次数，当gap==1的时候，数组基本有序，大大减少了数组的移动，或交换次数
+        for(int i = gap; i < n; ++i) {
+            j = i;
+            while(j-gap >= 0 && arr[j] < arr[j-gap]) {
+                swap(arr[j], arr[j-gap]);
+                j -= gap;
+            }
+        }
+    }
+}
 
 int main() {
     std::string filename = "random_array.txt"; // 输出文件名
@@ -39,8 +47,10 @@ int main() {
     auto start = std::chrono::high_resolution_clock::now();
     // 排序
     // testSwapVector();
-    heapSort(arr, n);
+    // insertSort(arr, n);
+    shellSort(arr, n);
     auto end = std::chrono::high_resolution_clock::now();
+
 
 
     // 查看排序结果
@@ -48,6 +58,8 @@ int main() {
         cout << a << " ";
     } 
     cout << endl;
+
+
 
 
     // 计算持续时间，转换为合适的单位显示
@@ -59,33 +71,6 @@ int main() {
     return 0;
 }
 
-// 单口递归
-void heapify(vector<int>& arr, int n, int i) // max Heap
-{
-    int maxIdx = i;
-    int leftSon = 2 * i + 1;
-    int rightSon = 2 * i + 2;
-    if(leftSon < n && arr[leftSon] > arr[maxIdx])
-        maxIdx = leftSon;
-    if(rightSon < n && arr[rightSon] > arr[maxIdx])
-        maxIdx = rightSon;
-    if(i != maxIdx) {
-        swap(arr[i], arr[maxIdx]);
-        heapify(arr, n, maxIdx);
-    }
-}
-
-void heapSort(vector<int>& arr, int n) {
-    // 建堆
-    for(int i = n/2-1; i >= 0; --i) {
-        heapify(arr, n, i);
-    }
-    // 排序
-    for(int i = n-1; i > 0; --i) {
-        swap(arr[i], arr[0]);
-        heapify(arr, i, 0);
-    }
-}
 
 // 从文件中读取随机数组的函数
 std::vector<int> readRandomArrayFromFile(const std::string& filename) {

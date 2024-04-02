@@ -8,6 +8,7 @@
 using namespace std;
 
 std::vector<int> readRandomArrayFromFile(const std::string& filename);
+void checkSortArr(vector<int>& arr, int n);
 
 void merge(vector<int>& arr, int left, int mid, int right, int* arrBuf)
 {
@@ -71,6 +72,8 @@ int main() {
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     std::cout << "Function took " << duration.count() << " microseconds to execute.\n";
 
+    checkSortArr(arr, n);
+
     return 0;
 }
 
@@ -92,4 +95,21 @@ std::vector<int> readRandomArrayFromFile(const std::string& filename) {
 
     inputFile.close(); // 关闭文件流
     return std::move(randomArray);
+}
+
+void checkSortArr(vector<int>& arr, int n)
+{
+    bool flag = true;
+    for(int i = 1; i < n; ++i) {
+        if(arr[i] < arr[i-1]) {
+            flag = false;
+            cout << arr[i] << " " << arr[i-1] << endl;
+            break;
+        }
+    }
+    if(flag) {
+        cout << "Check Sort Result OK !!!" << endl;
+    } else {
+        cout << "Sort Arr ERROR !!!" << endl;
+    }
 }
